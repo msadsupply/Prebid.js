@@ -29,13 +29,13 @@ var analyticsDirectory = '../analytics';
 var port = 9999;
 
 // Tasks
-gulp.task('default', ['clean', 'quality', 'webpack']);
+gulp.task('default', ['clean', 'lint', 'webpack']);
 
-gulp.task('serve', ['clean', 'quality', 'devpack', 'webpack', 'watch', 'test']);
+gulp.task('serve', ['clean', 'lint', 'devpack', 'webpack', 'watch', 'test']);
 
-gulp.task('serve-nw', ['clean', 'quality', 'devpack', 'webpack', 'watch', 'e2etest']);
+gulp.task('serve-nw', ['clean', 'lint', 'devpack', 'webpack', 'watch', 'e2etest']);
 
-gulp.task('run-tests', ['clean', 'quality', 'webpack', 'test', 'mocha']);
+gulp.task('run-tests', ['clean', 'lint', 'webpack', 'test', 'mocha']);
 
 gulp.task('build', ['webpack']);
 
@@ -172,11 +172,11 @@ gulp.task('watch', function () {
     'src/**/*.js',
     'test/spec/**/*.js',
     '!test/spec/loaders/**/*.js'
-  ], ['quality', 'webpack', 'devpack', 'test']);
+  ], ['lint', 'webpack', 'devpack', 'test']);
   gulp.watch([
     'loaders/**/*.js',
     'test/spec/loaders/**/*.js'
-  ], ['quality', 'mocha']);
+  ], ['lint', 'mocha']);
   gulp.watch(['integrationExamples/gpt/*.html'], ['test']);
   connect.server({
     https: argv.https,
@@ -186,12 +186,10 @@ gulp.task('watch', function () {
   });
 });
 
-gulp.task('quality', ['lint']);
-
 gulp.task('lint', () => {
   return gulp.src('src/**/*.js')
     .pipe(eslint())
-    .pipe(eslint.format())
+    .pipe(eslint.format('codeframe'))
     .pipe(eslint.failAfterError());
 });
 
