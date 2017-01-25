@@ -131,7 +131,7 @@ This runs code quality checks, generates all the necessary files and starts a we
 
 To run the example file, go to:
 
-+ `http://localhost:9999/integrationExamples/gpt/pbjs_example_gpt.html` 
++ `http://localhost:9999/integrationExamples/gpt/pbjs_example_gpt.html`
 
 To view a test coverage report, go to:
 
@@ -153,9 +153,9 @@ Please **do NOT load Prebid.js inside your adapter**. If you do this, we will re
 
 ### Code Quality
 
-Code quality is defined by `.jscs` and `.jshint` files and errors are reported in the terminal.
+Code quality is defined by `.eslintrc.json` and errors are reported in the terminal.
 
-If you are contributing code, you should configure your editor with the provided `.jscs` and `.jshint` settings.
+If you are contributing code, you should [configure your editor](http://eslint.org/docs/user-guide/integrations#editors) with the provided `.eslintrc.json` settings.
 
 ### Unit Testing with Karma
 
@@ -167,13 +167,13 @@ This will run tests and keep the Karma test browser open. If your `prebid.js` fi
 
 + For test results, see the console
 
-+ To set breakpoints in source code, see the developer tools 
++ To set breakpoints in source code, see the developer tools
 
 Detailed code coverage reporting can be generated explicitly with
 
         $ gulp test --coverage
 
-The results will be in 
+The results will be in
 
         ./build/coverage
 
