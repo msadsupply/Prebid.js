@@ -1,16 +1,11 @@
 {
   "env": {
     "browser": true,
-    "commonjs": true,
-    "es6": true,
-    "mocha": true,
-    "node": true
+    "commonjs": true
   },
   "extends": "eslint:recommended",
   "globals": {
-    "$$PREBID_GLOBAL$$": false,
-    "pbjs": false,
-    "sinon": true
+    "$$PREBID_GLOBAL$$": false
   },
   "parserOptions": {
     "sourceType": "module"
