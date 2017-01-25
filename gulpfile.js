@@ -1,7 +1,5 @@
-'use strict';
-
-var argv = require('yargs').argv;
 var gulp = require('gulp');
+var argv = require('yargs').argv;
 var gutil = require('gulp-util');
 var connect = require('gulp-connect');
 var webpack = require('webpack-stream');
@@ -20,6 +18,7 @@ var zip = require('gulp-zip');
 var replace = require('gulp-replace');
 var shell = require('gulp-shell');
 var optimizejs = require('gulp-optimize-js');
+const eslint = require('gulp-eslint');
 
 var CI_MODE = process.env.NODE_ENV === 'ci';
 var prebid = require('./package.json');
@@ -187,7 +186,14 @@ gulp.task('watch', function () {
   });
 });
 
-gulp.task('quality', []);
+gulp.task('quality', ['lint']);
+
+gulp.task('lint', () => {
+  return gulp.src('src/**/*.js')
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
 
 gulp.task('clean-docs', function () {
   del(['docs']);
