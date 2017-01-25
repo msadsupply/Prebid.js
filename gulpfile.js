@@ -6,7 +6,6 @@ var gutil = require('gulp-util');
 var connect = require('gulp-connect');
 var webpack = require('webpack-stream');
 var uglify = require('gulp-uglify');
-var jshint = require('gulp-jshint');
 var clean = require('gulp-clean');
 var karma = require('gulp-karma');
 var mocha = require('gulp-mocha');
@@ -16,7 +15,6 @@ var helpers = require('./gulpHelpers');
 var del = require('del');
 var gulpJsdoc2md = require('gulp-jsdoc-to-markdown');
 var concat = require('gulp-concat');
-var jscs = require('gulp-jscs');
 var header = require('gulp-header');
 var zip = require('gulp-zip');
 var replace = require('gulp-replace');
@@ -80,7 +78,7 @@ gulp.task('webpack', function () {
 });
 
 //zip up for release
-gulp.task('zip', ['jscs', 'clean', 'webpack'], function () {
+gulp.task('zip', ['clean', 'webpack'], function () {
   return gulp.src(['build/dist/*', 'integrationExamples/gpt/*'])
     .pipe(zip(packageNameVersion + '.zip'))
     .pipe(gulp.dest('./'));
@@ -189,22 +187,7 @@ gulp.task('watch', function () {
   });
 });
 
-gulp.task('quality', ['hint', 'jscs']);
-
-gulp.task('hint', function () {
-  return gulp.src('src/**/*.js')
-    .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(jshint.reporter('fail'));
-});
-
-gulp.task('jscs', function () {
-  return gulp.src('src/**/*.js')
-    .pipe(jscs({
-      configPath: '.jscsrc'
-    }))
-    .pipe(jscs.reporter());
-});
+gulp.task('quality', []);
 
 gulp.task('clean-docs', function () {
   del(['docs']);
